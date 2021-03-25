@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "832896398036",
+    "project_id": "vaccinator-a7eb0",
+    "storage_bucket": "vaccinator-a7eb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832896398036:android:78337c558541662e11c141",
+        "android_client_info": {
+          "package_name": "com.example.vaccinator_two"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832896398036-5sk6rk6drq1ae3speded8n45fhfrv9hb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vaccinator_two",
+            "certificate_hash": "86f77e2063151d7f03d5d67fea5bfc1917bc257b"
+          }
+        },
+        {
+          "client_id": "832896398036-2g5o7u2cv4cglls94gail996vbfmj67i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZ-4f1XKbS_qASR3Vm4kfCllUCgbyWKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832896398036-2g5o7u2cv4cglls94gail996vbfmj67i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
