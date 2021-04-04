@@ -246,7 +246,7 @@ class _AddChildState extends State<AddChild> {
                   ),
                   onPressed: () {
                     _formKey.currentState.save();
-                    if (dob == null || gender == -1 || name == ""|| photo == null ) {
+                    if (dob == null || gender == -1 || name == "") {
                       setState(() {
                         showError = true;
                       });

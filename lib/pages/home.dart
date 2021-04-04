@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccinator_two/pages/calendar_view.dart';
 import 'package:vaccinator_two/data/child.dart' ;
+import 'package:vaccinator_two/data/allChildren.dart' ;
 
 List<Child> children ;
 
@@ -235,7 +236,14 @@ class _MyHomePageState extends State<MyHomePage>  {
                               child: IconButton(
                                 icon: Icon(Icons.list_alt),
                                 onPressed: () {
-                                  setState(() {});
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AllChildren(children: children),
+                                      ),
+                                    );
+                                  });
                                 },
                               )),
                           Text('View All'//, style: GoogleFonts.lato()
