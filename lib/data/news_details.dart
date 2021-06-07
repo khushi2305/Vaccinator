@@ -22,7 +22,7 @@ class _NewsDetailsState extends State<NewsDetails> {
               Column(
                 children: <Widget>[
                   Image.network((widget.article.urlToImage==null
-                      ?"https://www.google.co.in/url?sa=i&url=https%3A%2F%2Fwww.everydayhealth.com%2F&psig=AOvVaw15hAQAIXeHKnC9JwzvKSlZ&ust=1623095308729000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJiZ9q3jg_ECFQAAAAAdAAAAABAD"
+                      ?"https://www.healthcareitnews.com/sites/hitn/files/Global%20healthcare_2.jpg"
                       :widget.article.urlToImage)),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

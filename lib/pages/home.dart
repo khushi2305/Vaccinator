@@ -53,7 +53,7 @@ Widget pageViewWidget(List<Article> article) {
                         //   height: 100.0,
                         //   width: 100.0,
                         // )
-                        ? Image.network('https://www.google.co.in/url?sa=i&url=https%3A%2F%2Fwww.everydayhealth.com%2F&psig=AOvVaw15hAQAIXeHKnC9JwzvKSlZ&ust=1623095308729000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJiZ9q3jg_ECFQAAAAAdAAAAABAD')
+                        ? Image.network('https://www.healthcareitnews.com/sites/hitn/files/Global%20healthcare_2.jpg')
                         : Image.network('${article[i].urlToImage}'),
                     height: 100.0,
                     width: 100.0,

@@ -60,7 +60,7 @@ class Article {
     "title": title,
     "description": description,
     "url": url,
-    "urlToImage": urlToImage,
+    "urlToImage": urlToImage == null ? 'https://www.healthcareitnews.com/sites/hitn/files/Global%20healthcare_2.jpg' : urlToImage,
     "publishedAt": publishedAt.toIso8601String(),
     "content": content == null ? null : content,
   };
