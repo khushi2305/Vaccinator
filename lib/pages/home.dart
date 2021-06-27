@@ -1,10 +1,79 @@
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccinator_two/pages/calendar_view.dart';
 import 'package:vaccinator_two/data/child.dart' ;
+import 'package:vaccinator_two/data/allChildren.dart' ;
+import 'package:vaccinator_two/data/news.dart' ;
+import 'package:vaccinator_two/data/news_details.dart' ;
 
-List<Child> children ;
+Future<List<Article>> getData() async {
+  List<Article> list;
+  String link = "https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=e2a0d8cdd3e54b8d86c271f4361b4aee";
+  var res = await http.get(Uri.encodeFull(link), headers: {"Accept": "application/json"});
+  print(res.body);
+  if (res.statusCode == 200) {
+    var data = json.decode(res.body);
+    var rest = data["articles"] as List;
+    print(rest);
+    list = rest.map<Article>((json) => Article.fromJson(json)).toList();
+  }
+  print("List Size: ${list.length}");
+  return list;
+}
+
+Widget pageViewWidget(List<Article> article) {
+  return Container(
+    child: PageView.builder(
+        itemCount: 20,
+        controller: PageController(viewportFraction: 0.75),
+        itemBuilder: (context, i) {
+          return Card(
+              color: Colors.teal[100],
+              child: Padding(
+                padding: const EdgeInsets.all(7.2),
+                child: ListTile(
+                title: Text(
+                  '${article[i].title}',
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                leading: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: SizedBox(
+                    child: article[i].urlToImage == null
+                        // ? Image(
+                        //   image: AssetImage('images/no_image_available.png'),
+                        //   height: 100.0,
+                        //   width: 100.0,
+                        // )
+                        ? Image.network('https://www.healthcareitnews.com/sites/hitn/files/Global%20healthcare_2.jpg')
+                        : Image.network('${article[i].urlToImage}'),
+                    height: 100.0,
+                    width: 100.0,
+                  ),
+                ),
+                onTap: () => _onTapItem(context, article[i]),
+              ),
+            ),
+          );
+        },
+    )
+  );
+}
+
+void _onTapItem(BuildContext context, Article article) {
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => NewsDetails(article)));
+}
+
+List<Child> children;
 
 class MyHomePage extends StatefulWidget {
 
@@ -235,7 +304,14 @@ class _MyHomePageState extends State<MyHomePage>  {
                               child: IconButton(
                                 icon: Icon(Icons.list_alt),
                                 onPressed: () {
-                                  setState(() {});
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AllChildren(children: children),
+                                      ),
+                                    );
+                                  });
                                 },
                               )),
                           Text('View All'//, style: GoogleFonts.lato()
@@ -338,32 +414,19 @@ class _MyHomePageState extends State<MyHomePage>  {
             Expanded(
               flex: 4,
               child: Column(children: <Widget>[
-                SizedBox(
-                  height: 150, // card height
-                  child: PageView.builder(
-                    itemCount: 10,
-                    controller: PageController(viewportFraction: 0.7),
-                    onPageChanged: (int index) =>
-                        setState(() => _index = index),
-                    itemBuilder: (_, i) {
-                      return Transform.scale(
-                        scale: i == _index ? 1 : 0.9,
-                        child: Card(
-                          elevation: 6,
-                          color:Colors.teal[700],
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Center(
-                            child: Text(
-                              "Article ${i + 1}",
-                              style: TextStyle(fontSize: 32),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                Container(
+                  margin: const EdgeInsets.only(top: 20.0),
+                  height: 130, // card height
+                  child: Scaffold(
+                        body: FutureBuilder(
+                            future: getData(),
+                            builder: (context, snapshot) {
+                              return snapshot.data != null
+                                  ? pageViewWidget(snapshot.data)
+                                  : Center(child: CircularProgressIndicator());
+                            }),
+                      )
                   ),
-                ),
               ]),
             ),
             Expanded(
