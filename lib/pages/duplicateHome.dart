@@ -420,7 +420,6 @@ import 'package:vaccinator_two/data/child.dart';
 import 'package:vaccinator_two/pages/addChild.dart';
 import 'package:vaccinator_two/pages/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:vaccinator_two/controllers/setAutoReminders.dart';
 import 'dart:io';
 
 List<Child> children;
@@ -437,7 +436,6 @@ class _MyHomePageState extends State<MyHomePage> {
   _MyHomePageState(this.uid);
   var user = Firestore.instance.collection('users');
   int _index = 0;
-  int _index2 = 0;
   int numCards = 1;
 
   _addChild(Child newChild) async {
@@ -449,24 +447,22 @@ class _MyHomePageState extends State<MyHomePage> {
         .collection('children')
         .add(newChild.toJson())
         .then((docRef) =>
-            {print("Document written with ID: " + docRef.documentID)})
+    {print("Document written with ID: " + docRef.documentID)})
         .catchError((error) => {print("Error adding document: ")});
-    Reminders system = Reminders(newChild);
-    system.showNotification();
-
+    ;
   }
 
   Future<void> getChildrenFromDatabase() async {
     QuerySnapshot querySnapshot =
-        await user.document(uid).collection('children').getDocuments();
+    await user.document(uid).collection('children').getDocuments();
     for (int i = 0; i < querySnapshot.documents.length; i++) {
       // print("Database");
       var time = querySnapshot.documents[i].data['dob'];
       var dob = DateTime.fromMicrosecondsSinceEpoch(time.microsecondsSinceEpoch);
       Child cutie = new Child(querySnapshot.documents[i].data['name'], dob,
           querySnapshot.documents[i].data['gender'],null);
-         cutie.events = cutie.getEventsfromdatabase(querySnapshot.documents[i].data['events']);
-         setState(() {
+      cutie.events = cutie.getEventsfromdatabase(querySnapshot.documents[i].data['events']);
+      setState(() {
         children.add(cutie);
       });
     }
@@ -548,7 +544,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Text(
                               'Vaccine Reminder',
                               style: //GoogleFonts.lato(textStyle:
-                                  TextStyle(
+                              TextStyle(
                                 color: Colors.cyan[900],
                                 fontSize: 30.0,
                                 fontWeight: FontWeight.bold,
@@ -574,87 +570,87 @@ class _MyHomePageState extends State<MyHomePage> {
                                       //     226,90,21,.5),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20)),
+                                          BorderRadius.circular(20)),
                                       child: (children != null &&
-                                              children.length != 0 &&
-                                              i == _index)
+                                          children.length != 0 &&
+                                          i == _index)
                                           ? Column(children: <Widget>[
-                                              Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Center(
-                                                    child: Text(
-                                                        children[_index].name,
-                                                        style: // GoogleFonts.lato(textStyle:
-                                                            TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 20.0,
-                                                          fontWeight:
-                                                              FontWeight.w900,
-                                                          //     ),
-                                                        )),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text(
-                                                  "To be Taken on - ${children[_index].nextDue.keys.first.day} - ${children[_index].nextDue.keys.first.month} - ${children[_index].nextDue.keys.first.year}",
-                                                  style: //GoogleFonts.lato(textStyle:
-                                                      TextStyle(
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Center(
+                                              child: Text(
+                                                  children[_index].name,
+                                                  style: // GoogleFonts.lato(textStyle:
+                                                  TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 15.0,
-                                                    fontWeight: FontWeight.w700,
-                                                    //  ),
+                                                    fontSize: 20.0,
+                                                    fontWeight:
+                                                    FontWeight.w900,
+                                                    //     ),
                                                   )),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  CircleAvatar(
-                                                      radius: 35,
-                                                      backgroundColor:
-                                                          Color.fromRGBO(255,
-                                                              255, 255, 1),
-                                                      child:ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(30),
-                                                        child: Image.file(
-                                                          children[_index]
-                                                              .photo,
-                                                          width: 65,
-                                                          height: 65,
-                                                          fit: BoxFit.fill,
-                                                        ),
-                                                      )),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      for (var next
-                                                          in children[_index]
-                                                              .nextDue
-                                                              .values
-                                                              .first)
-                                                        Text(
-                                                          next,
-                                                          style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.teal[50],
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                          ),
-                                                        ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )
-                                            ])
-                                          : Center(
-                                              child: Text("No child Added"),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                            "To be Taken on - ${children[_index].nextDue.keys.first.day} - ${children[_index].nextDue.keys.first.month} - ${children[_index].nextDue.keys.first.year}",
+                                            style: //GoogleFonts.lato(textStyle:
+                                            TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.w700,
+                                              //  ),
                                             )),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceEvenly,
+                                          children: [
+                                            CircleAvatar(
+                                                radius: 35,
+                                                backgroundColor:
+                                                Color.fromRGBO(255,
+                                                    255, 255, 1),
+                                                child:ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(30),
+                                                  child: Image.file(
+                                                    children[_index]
+                                                        .photo,
+                                                    width: 65,
+                                                    height: 65,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                )),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                for (var next
+                                                in children[_index]
+                                                    .nextDue
+                                                    .values
+                                                    .first)
+                                                  Text(
+                                                    next,
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      color:
+                                                      Colors.teal[50],
+                                                      fontWeight:
+                                                      FontWeight.w700,
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      ])
+                                          : Center(
+                                        child: Text("No child Added"),
+                                      )),
                                 );
                               },
                             ),
@@ -679,7 +675,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Ink(
                               decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.cyan, width: 3.0),
+                                Border.all(color: Colors.cyan, width: 3.0),
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
@@ -699,7 +695,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Ink(
                               decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.cyan, width: 3.0),
+                                Border.all(color: Colors.cyan, width: 3.0),
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
@@ -709,7 +705,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                               )),
                           Text('View All' //, style: GoogleFonts.lato()
-                              )
+                          )
                         ],
                       ),
                       Column(
@@ -747,18 +743,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           Ink(
                               decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.cyan, width: 3.0),
+                                Border.all(color: Colors.cyan, width: 3.0),
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
                                 icon: Icon(Icons.collections),
                                 tooltip: "Add Child",
                                 onPressed: () {
-                                  Navigator.pushNamed(context,'/localNotif');
+                                  setState(() {});
                                 },
                               )),
-                          Text('Set a'),
-                          Text('Reminder')
+                          Text('Immunization'),
+                          Text('Articles')
                         ],
                       ),
                       Column(
@@ -767,7 +763,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Ink(
                               decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.cyan, width: 3.0),
+                                Border.all(color: Colors.cyan, width: 3.0),
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
@@ -778,7 +774,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                               )),
                           Text('Ask a Doctor' //, style: GoogleFonts.lato()
-                              )
+                          )
                         ],
                       ),
                       Column(
@@ -787,7 +783,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Ink(
                               decoration: BoxDecoration(
                                 border:
-                                    Border.all(color: Colors.cyan, width: 3.0),
+                                Border.all(color: Colors.cyan, width: 3.0),
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
@@ -814,10 +810,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemCount: 10,
                     controller: PageController(viewportFraction: 0.7),
                     onPageChanged: (int index) =>
-                        setState(() => _index2 = index),
+                        setState(() => _index = index),
                     itemBuilder: (_, i) {
                       return Transform.scale(
-                        scale: i == _index2 ? 1 : 0.9,
+                        scale: i == _index ? 1 : 0.9,
                         child: Card(
                           elevation: 6,
                           color: Colors.teal[700],
@@ -865,7 +861,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) => LoginScreen()),
-                                  (Route<dynamic> route) => false);
+                                      (Route<dynamic> route) => false);
                             }),
                           ),
                         ])))

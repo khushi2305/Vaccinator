@@ -37,7 +37,7 @@ Future<bool> googleSignIn() async {
   // Adding the user to the firebase account
   if (googleSignInAccount != null) {
     GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount.authentication;
+        await googleSignInAccount.authentication;
 
     AuthCredential credential = GoogleAuthProvider.getCredential(
         idToken: googleSignInAuthentication.idToken,
@@ -45,7 +45,7 @@ Future<bool> googleSignIn() async {
 
     AuthResult result = await auth.signInWithCredential(credential);
     FirebaseUser user = await auth.currentUser();
-    print("USER.ID IS EQUAL TO "+user.uid);
+    print("USER.ID IS EQUAL TO " + user.uid);
     return Future.value(true);
   }
 }
@@ -56,7 +56,7 @@ Future<FirebaseUser> signin(
     String email, String password, BuildContext context) async {
   try {
     AuthResult result =
-    await auth.signInWithEmailAndPassword(email: email, password: email);
+        await auth.signInWithEmailAndPassword(email: email, password: email);
     FirebaseUser user = result.user;
     // return Future.value(true);
     return Future.value(user);

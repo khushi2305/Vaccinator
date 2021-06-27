@@ -4,7 +4,7 @@ import 'package:vaccinator_two/controllers/authentication.dart';
 import 'package:vaccinator_two/pages/home.dart';
 import 'package:vaccinator_two/pages/signUp_screen.dart';
 import 'package:vaccinator_two/pages/home.dart';
- import 'package:form_field_validator/form_field_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -24,7 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => MyHomePage(),//TasksPage(uid: value.uid)
+                builder: (context) =>
+                    MyHomePage(uid: value.uid), //TasksPage(uid: value.uid)
               ));
         }
       });
@@ -102,10 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => MyHomePage()));//TasksPage(uid: user.uid)
+                      builder: (context) => MyHomePage(
+                          uid: user.uid))); //TasksPage(uid: user.uid)
                 }),
                 child: Image(
-                  image: NetworkImage('https://raw.githubusercontent.com/desi-programmer/flutter_auths/master/assets/signin.png'),
+                  image: AssetImage('assets/googleSignIn.png'),
                   width: 200.0,
                 ),
               ),

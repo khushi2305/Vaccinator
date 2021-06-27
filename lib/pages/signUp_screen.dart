@@ -24,7 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => MyHomePage(),//TasksPage(uid: value.uid)
+                builder: (context) =>
+                    MyHomePage(uid: value.uid), //TasksPage(uid: value.uid)
               ));
         }
       });
@@ -102,12 +103,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => MyHomePage() ));//TasksPage(uid: user.uid)
+                      builder: (context) => MyHomePage(
+                          uid: user.uid))); //TasksPage(uid: user.uid)
                 }),
                 child: Image(
-                  image: NetworkImage('https://raw.githubusercontent.com/desi-programmer/flutter_auths/master/assets/signin.png'),
-        width: 200.0,
-      ),
+                  image: AssetImage('assets/googleSignIn.png'),
+                  width: 200.0,
+                ),
               ),
               SizedBox(
                 height: 10.0,

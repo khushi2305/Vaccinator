@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-//import 'package:google_fonts/google_fonts.dart';
 import '../data/child.dart';
-import '../pages/select_initial_reminders.dart' ;
+import '../pages/select_initial_reminders.dart';
 
 String name = "";
 File photo; // Image of the baby
@@ -86,15 +85,28 @@ class _AddChildState extends State<AddChild> {
     );
   }
 
-  @override
-  void initState(){
-    super.initState();
-     name = "";
-     photo = null; // Image of the baby
-     dob = null;
-     formattedDate = "";
-     gender = -1;
+  void _goToSelectReminders(BuildContext context, Child newChild) async {
+    Child result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => Select_Initial_Reminders(
+          child: newChild,
+        ),
+      ),
+    );
+    Navigator.pop(context, result);
   }
+
+  @override
+  void initState() {
+    super.initState();
+    name = "";
+    photo = null; // Image of the baby
+    dob = null;
+    formattedDate = "";
+    gender = -1;
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -107,10 +119,10 @@ class _AddChildState extends State<AddChild> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text('Child Details',
-                    style:  TextStyle(
-                        color: Colors.cyan[900],
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
+                    style: TextStyle(
+                      color: Colors.cyan[900],
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
                     )),
               ),
               // Add an option to add Image
@@ -246,21 +258,18 @@ class _AddChildState extends State<AddChild> {
                   ),
                   onPressed: () {
                     _formKey.currentState.save();
-                    if (dob == null || gender == -1 || name == ""|| photo == null ) {
+                    if (dob == null ||
+                        gender == -1 ||
+                        name == "" ||
+                        photo == null) {
                       setState(() {
                         showError = true;
                       });
                       return;
                     }
                     showError = false;
-                    Child newChild = Child(photo, name, dob, gender);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Select_Initial_Reminders(
-                            child: newChild,
-                          ),),);
-
+                    Child newChild = Child(name, dob, gender, photo);
+                    _goToSelectReminders(context, newChild);
                     // Navigator.pushNamed(context, '/select_initial_reminders',
                     //     arguments: {'child': newChild});
                   },
