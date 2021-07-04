@@ -53,11 +53,6 @@ Widget pageViewWidget(List<Article> article) {
                   padding: const EdgeInsets.all(0.0),
                   child: SizedBox(
                     child: article[i].urlToImage == null
-                        // ? Image(
-                        //   image: AssetImage('images/no_image_available.png'),
-                        //   height: 100.0,
-                        //   width: 100.0,
-                        // )
                         ? Image.network('https://www.healthcareitnews.com/sites/hitn/files/Global%20healthcare_2.jpg')
                         : Image.network('${article[i].urlToImage}'),
                     height: 100.0,
@@ -79,7 +74,6 @@ void _onTapItem(BuildContext context, Article article) {
 }
 
 List<Child> children;
-
 class MyHomePage extends StatefulWidget {
   final String uid;
   MyHomePage({Key key, @required this.uid}) : super(key: key);
@@ -115,7 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
     QuerySnapshot querySnapshot =
         await user.document(uid).collection('children').getDocuments();
     for (int i = 0; i < querySnapshot.documents.length; i++) {
-      // print("Database");
       var time = querySnapshot.documents[i].data['dob'];
       var dob = DateTime.fromMicrosecondsSinceEpoch(time.microsecondsSinceEpoch);
       Child cutie = new Child(querySnapshot.documents[i].data['name'], dob,
@@ -127,9 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     numCards = children.length == 0 ? 1 : children.length;
-    // print(children.length);
     if (children != null) {
-      // print('HEYYY');
       for (Child child in children) child.getNextDueVaccines();
     }
 
@@ -138,7 +129,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // print(children == null);
     if (children == null) {
       children = [];
       getChildrenFromDatabase();
@@ -253,12 +243,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                               Text(
                                                   "To be Taken on - ${children[_index].nextDue.keys.first.day} - ${children[_index].nextDue.keys.first.month} - ${children[_index].nextDue.keys.first.year}",
-                                                  style: //GoogleFonts.lato(textStyle:
+                                                  style:
                                                       TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.w700,
-                                                    //  ),
                                                   )),
                                               Row(
                                                 mainAxisAlignment:
@@ -341,7 +330,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 icon: Icon(Icons.add),
                                 onPressed: () {
                                   _goToAddChildPage(context);
-                                  //Navigator.pushNamed(context, '/addChild');
                                   setState(() {});
                                 },
                               )),

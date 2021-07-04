@@ -7,7 +7,7 @@ import '../data/child.dart';
 import '../pages/select_initial_reminders.dart';
 
 String name = "";
-File photo; // Image of the baby
+File photo; // Image of the Child
 DateTime dob;
 String formattedDate;
 int gender = -1;
@@ -101,7 +101,7 @@ class _AddChildState extends State<AddChild> {
   void initState() {
     super.initState();
     name = "";
-    photo = null; // Image of the baby
+    photo = null; // Image of the child
     dob = null;
     formattedDate = "";
     gender = -1;
@@ -270,8 +270,6 @@ class _AddChildState extends State<AddChild> {
                     showError = false;
                     Child newChild = Child(name, dob, gender, photo);
                     _goToSelectReminders(context, newChild);
-                    // Navigator.pushNamed(context, '/select_initial_reminders',
-                    //     arguments: {'child': newChild});
                   },
                   icon: Icon(Icons.arrow_forward_sharp),
                   label: Text(""),

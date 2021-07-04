@@ -41,8 +41,6 @@ class _NotifPageState extends State {
     var generalNotificationDetails =
     new NotificationDetails(androidDetails,iOSDetails); // android: iOS:
 
-    // await fltrNotification.show(
-    //     0, "Task", "You created a Task", generalNotificationDetails, payload: "Task");
     var scheduledTime;
     if (_selectedParam == "Hour") {
       scheduledTime = DateTime.now().add(Duration(hours: val));
@@ -52,7 +50,6 @@ class _NotifPageState extends State {
       scheduledTime = DateTime.now().add(Duration(seconds: val));
     }
 
-    //fltrNotification.zonedSchedule(1, "Vaccine Reminder", "Its time to vaccinate your child ", scheduledTime, generalNotificationDetails);
     fltrNotification.schedule
       (
         1, "Vaccine Reminder", task, scheduledTime, generalNotificationDetails);

@@ -228,7 +228,6 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO - Display baccha and select them and diplay their reminders
     _showAddDialog() async {
       await showDialog(
           context: context,
@@ -291,7 +290,6 @@ class _CalendarPageState extends State<CalendarPage> {
                       color: Colors.cyan[900],
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
-                //    ),
                   )),
             ),
             Container(

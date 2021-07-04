@@ -191,7 +191,6 @@ import 'package:flutter/material.dart';
 import 'package:vaccinator_two/pages/home.dart';
 import '../data/allVaccines.dart';
 import '../data/vaccine.dart';
-//import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccinator_two/data/child.dart';
 
 class Select_Initial_Reminders extends StatefulWidget {
@@ -287,9 +286,6 @@ class _Select_Initial_RemindersState extends State<Select_Initial_Reminders> {
                 itemCount: widget.child.vaccines_date_gone.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
-                    //shrinkWrap: true,
-                    // children:  AllVaccines.allVaccines[index].doses.map((item) => new Text(item)).toList()
-                    // for (var dose in AllVaccines.allVaccines[index].doses) Text(item),
                     children: <Widget>[
                       for (var dose
                           in widget.child.vaccines_date_gone[index].doses)

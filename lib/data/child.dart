@@ -94,7 +94,6 @@ class Child {
         return (a.compareTo(b));
       });
     DateTime nearest = sortedKeys[0];
-    // print('Nearest'+nearest.toString());
     for (var key in events.keys) {
       if (key == nearest) {
         this.nextDue = {nearest: events[nearest]};

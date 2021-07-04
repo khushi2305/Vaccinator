@@ -12,9 +12,9 @@ class Reminders {
   int val;
 
 
-  Reminders(Child bachha ) {
-    child = new Child(bachha.name , bachha.dob , bachha.gender , bachha.photo ) ;
-    child.events = bachha.events ;
+  Reminders(Child child ) {
+    child = new Child(child.name , child.dob , child.gender , child.photo ) ;
+    child.events = child.events ;
     var androidInitilize = new AndroidInitializationSettings('app_icon');
     var iOSinitilize = new IOSInitializationSettings();
     var initilizationsSettings =
@@ -41,20 +41,14 @@ class Reminders {
     new NotificationDetails(androidDetails,
          iOSDetails);
 
-    int ind = 0 ;
-    // tz.initializeTimeZones();
-    // tz.setLocalLocation(tz.getLocation('Europe/Warsaw'));
-    // var currentDateTime = tz.TZDateTime.now().add(const Duration(hours: 10));
+    int index = 0 ;
     child.events.forEach((k, v) {
-      ind++;
+      index++;
       var scheduledTime = child.dob ;
-      //fltrNotification.zonedSchedule(ind, "Vaccine Reminder for "+ child.name ,"Its time to vaccinate your child", scheduledTime, generalNotificationDetails);
-      fltrNotification.schedule(ind, "Vaccine Reminder for "+ child.name ,"Its time to vaccinate your child", scheduledTime, generalNotificationDetails);
+      fltrNotification.schedule(index, "Vaccine Reminder for "+ child.name ,"Its time to vaccinate your child", scheduledTime, generalNotificationDetails);
 
     });
     }
-
   Future notificationSelected(String payload) async {
-    // Do something
   }
 }
