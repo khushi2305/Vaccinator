@@ -1,6 +1,6 @@
 # vaccinator_two
 
-A new Flutter application.
+•	A vaccine reminder app that can be used to keep a track of the vaccination schedule of the children. The app is built on flutter and integrated with firebase.
 
 ## Getting Started
 
